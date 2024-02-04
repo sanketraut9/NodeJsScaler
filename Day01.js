@@ -7,8 +7,10 @@ function sayHello(){
 
 // sayHello()
 
-// window object does not present in nodejs. nodeJs uses global object
 
+// ************The Global Object****************//
+
+// window object does not present in nodejs. nodeJs uses global object
 // console.log(global);               //Js we use window object
 
 let name = 'sanket'
