@@ -1,0 +1,22 @@
+cmds to create npm account
+
+npm adduser{
+    username:
+    password;
+    email:
+}
+
+Login:
+npm login{
+    username:
+    password:
+}
+
+Publish package
+package.json{
+    main:'calculator.js'             //file name that you want to publish
+}
+
+in Terminal{
+    npm
+}
