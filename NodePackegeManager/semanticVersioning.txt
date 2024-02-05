@@ -1,0 +1,13 @@
+Example:
+
+dependencies": {
+    "figlet": "^1.7.0"    //Major.Minor.Patch
+  }
+
+
+  Major -If Huge changes made in package
+  Minor - If small changes made in package
+  Patch - when bug has been solved
+
+
+  This is Semantic Versionning
