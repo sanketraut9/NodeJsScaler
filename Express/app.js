@@ -18,6 +18,8 @@ const courses = [
     {id:3, name: 'python'}
 ]
 
+//Get - read
+
 app.get('/',(req, res) => {
     res.send('hello from scaler topic')
 });
@@ -35,7 +37,7 @@ app.get('/courses',(req, res) => {
 });
 
 
-//Post()
+//Post() - create
 
 app.post('/courses', (req, res) => {
     const course = {
@@ -46,7 +48,19 @@ app.post('/courses', (req, res) => {
     res.send(course)
 })
 
-//Rout parameters:
+
+//Put - update
+
+app.put('/course/:id', (req, res) => {
+    let course = courses.find(course => course.id === parseInt(req.params.id))
+
+    if(!course) res.status(404).send('The course you are looking for does not exist')
+
+    course = req.body
+    res.send(course)
+})
+
+//Route parameters:
 
 app.get('/course/:id', (req, res) => {
     // res.send(req.params.id);               //req.params-store route parameter
