@@ -12,7 +12,7 @@ app.use(express.json())
 //get() take 2 object - '/' where will requesting to data 
 
 
-const courses = [
+let courses = [
     {id:1, name: 'javascript'},
     {id:2, name: 'java'},
     {id:3, name: 'python'}
@@ -58,6 +58,36 @@ app.put('/course/:id', (req, res) => {
 
     course = req.body
     res.send(course)
+})
+
+
+//Delete
+// app.delete('/course/:id', (req,res) => {
+//     let updatedCourses = courses.filter(course => course.id !== parseInt(req.params.id))
+
+//     courses = updatedCourses
+//     res.send(courses)
+
+// })
+
+// app.delete('/course/:name', (req,res) => {
+//     let updatedCourses = courses.filter(course => course.name !== req.params.name)
+
+//     courses = updatedCourses
+//     res.send(courses)
+
+// })
+
+app.delete('/course/:id', (req,res) => {
+    let course = courses.find(course => course.id === parseInt(req.params.id))
+
+    if(!course) res.status(404).send('The course you are looking for does not exist')
+
+    const index = courses.indexOf(course)
+    courses.splice(index, 1)
+
+    res.send(courses)
+
 })
 
 //Route parameters:
