@@ -5,6 +5,9 @@ const app = express();
 //Environmet Port       || if not sesrver start on 3000 port
 const port = process.env.port || 3000;
 
+
+app.use(express.json())
+
 //get, post, put, delete
 //get() take 2 object - '/' where will requesting to data 
 
@@ -26,6 +29,22 @@ app.get('/about',(req, res) => {
 app.get('/contact',(req, res) => {
     res.send('Contact us at a xyz@gmail.com')
 });
+
+app.get('/courses',(req, res) => {
+    res.send(courses)
+});
+
+
+//Post()
+
+app.post('/courses', (req, res) => {
+    const course = {
+        id: req.body.id,
+        name:req.body.name
+    }
+    courses.push(course)
+    res.send(course)
+})
 
 //Rout parameters:
 
