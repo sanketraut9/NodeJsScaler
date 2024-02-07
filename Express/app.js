@@ -6,7 +6,14 @@ const app = express();
 const port = process.env.port || 3000;
 
 //get, post, put, delete
-//get() take 2 object - '/' where will requesting to data   
+//get() take 2 object - '/' where will requesting to data 
+
+
+const courses = [
+    {id:1, name: 'javascript'},
+    {id:2, name: 'java'},
+    {id:3, name: 'python'}
+]
 
 app.get('/',(req, res) => {
     res.send('hello from scaler topic')
@@ -18,6 +25,16 @@ app.get('/about',(req, res) => {
 
 app.get('/contact',(req, res) => {
     res.send('Contact us at a xyz@gmail.com')
+});
+
+//Rout parameters:
+
+app.get('/course/:id', (req, res) => {
+    // res.send(req.params.id);               //req.params-store route parameter
+    let course = courses.find(course => course.id === parseInt(req.params.id))
+
+    if(!course) res.status(404).send('The course you are looking for does not exist')
+    res.send(course)
 });
 
 
