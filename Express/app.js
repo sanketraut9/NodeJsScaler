@@ -2,11 +2,19 @@ const express = require('express');
 
 const app = express();
 
+//moddleware export
+const middlewareFunc = require('./middlewares/middle')
+const middlewareFunc2 = require('./middle2')
+
 //Environmet Port       || if not sesrver start on 3000 port
 const port = process.env.port || 3000;
 
 
 app.use(express.json())
+
+//Custom Midlewares
+app.use(middlewareFunc)
+app.use(middlewareFunc2)
 
 //get, post, put, delete
 //get() take 2 object - '/' where will requesting to data 
