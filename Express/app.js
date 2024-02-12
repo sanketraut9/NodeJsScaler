@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan  =require('morgan')
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(middlewareFunc)
 app.use(middlewareFunc2)
 
+app.use(morgan())
 //get, post, put, delete
 //get() take 2 object - '/' where will requesting to data 
 
