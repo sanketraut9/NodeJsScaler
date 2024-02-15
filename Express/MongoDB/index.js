@@ -24,12 +24,13 @@ async function createCourse(){
         creator:'Ron',
         isPublished: true,
         rating: 2.2
-    })
+    })       //create
     
     const result = await course.save()
     console.log(result);
 }
 
+// createCourse()
 
 //Comparision operator::
 // eq(equal) // gt(greater than) // gte(greater than equal)
@@ -41,8 +42,25 @@ async function createCourse(){
 async function getCourses(){
     const courses  = await Course.find({rating : {$in : [2.2, 3.2]}}).select({name:1, publishDate:1}).or([{creator:'Dyana'}, {rating: 3.2}])
     console.log(courses);
-}
+}        //reading
+
+// getCourses()
 
 
-// createCourse()
-getCourses()
+
+//UpdateCourse
+
+async function updateCourse(id){
+    let course = await Course.findById(id)
+
+    if(!course) return;
+
+    course.name = 'mongodb'
+    course.creator = 'sam'
+
+    const updatedCourse = await course.save()
+
+    console.log(updatedCourse);
+}         //updating
+
+updateCourse('65ce0342cdb196e950993dd7')
