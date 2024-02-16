@@ -6,17 +6,16 @@ mongoose.connect('mongodb://127.0.0.1/testdata').then(()=> console.log('connecti
 
 
 const courseSchema = new mongoose.Schema({
-    name: {type:String, required:true},
-    // category:{
-    //     type: String,
-    //     required:true,
-    //     enum: ['DSA', 'Web', 'Mobile', 'Data science']
-    // },
+    name: {type:String, required:true, minlength:5, maxlength: 15},
+    category:{
+        type: String,
+        required:true,
+        enum: ['DSA', 'Web', 'Mobile', 'Data science']
+    },
     creator: {type:String, required:true},
     publishedDate: {type:Date, default:Date.now},
     isPublished: {type:Boolean, required:true},
-    rating: Number
-    // {type:Number, required:function(){return this.isPublished}},
+    rating: {type:Number, required:function(){return this.isPublished}},
 })
 
 
@@ -26,21 +25,21 @@ const Course = mongoose.model('Class', courseSchema)
 
 async function createCourse(){
     const course = new Course({
-        name:'java',
-        // category: 'Web',
-        // creator:'sam',
-        // isPublished: true,
-        // rating: 3.4
+        name:'Groovy',
+        category: 'Data science',
+        creator:'Sara',
+        isPublished: true,
+        rating: 3.8
     })       //create
 
 
 
     ////Validation: if data is incomplete it gives erro2
     try { 
-        await course.validate()
+        // await course.validate()
 
-        // const result = await course.save()
-        // console.log(result);
+        const result = await course.save()
+        console.log(result);
 
     } catch (error) {
         console.error(error.message);

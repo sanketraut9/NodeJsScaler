@@ -8,36 +8,30 @@ mongoose.connect('mongodb://127.0.0.1/testDatabase').then(()=> console.log('Conn
 const courseSchema = new mongoose.Schema({
     name: {type:String, required:true},
     creator: {type:String, required:true},
-    publishDate: {type:Date, default:Date.now},
+    publishedDate: {type:Date, default:Date.now},
     isPublished: {type:Boolean, required:true},
-    rating:{type:Number, required:true},
+    rating:{type:Number, required:function(){return this.isPublished}},
 })
 
 
 //Model
 
-const Course = mongoose.model('couse', courseSchema)
+const Course = mongoose.model('Course', courseSchema)
 
 async function createCourse(){
     const course = new Course({
-        name:'python',
-        creator:'Ron',
-        // isPublished: true,
-        // rating: 2.2
+        name:'C++',
+        creator:'Shub',
+        isPublished: true,
+        rating: 3.2
     })       //create
 
-    try {
-        // const result = await course.save()
-        // console.log(result);
-
-        await course.validate()
-    } catch (error) {
-        console.error(error.message);
-    }
+    const result = await course.save()
+    console.log(result);
         
 }
 
-createCourse()
+// createCourse()
 
 //Comparision operator::
 // eq(equal) // gt(greater than) // gte(greater than equal)
@@ -47,7 +41,8 @@ createCourse()
 // or     //and
 
 async function getCourses(){
-    const courses  = await Course.find({rating : {$in : [2.2, 3.2]}}).select({name:1, publishDate:1}).or([{creator:'Dyana'}, {rating: 3.2}])
+    const courses  = await Course.find({rating : {$in : [2.2,3.2,4, 4.5]}}).select({name:1, publishDate:1})
+    .or([{creator:'Dnyana'}, {rating: 3.2}])
     console.log(courses);
 }        //reading
 
