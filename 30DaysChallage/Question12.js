@@ -4,7 +4,7 @@
 
 const express = require('express');
 
-const rateLimitMiddleware = require('./Express/middlewares/rateLimitMiddleware');
+const rateLimitMiddleware = require('../Express/middlewares/rateLimitMiddleware');
 
 const app = express();
 
