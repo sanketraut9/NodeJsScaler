@@ -10,7 +10,7 @@ const mongoDBUrl = 'mongodb://127.0.0.1/testdata';
 // Function to establish connection to MongoDB
 function connectToMongoDB() {    
     try {
-        mongoose.connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+        mongoose.connect(mongoDBUrl);
         console.log('Connected to mongoDb');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
