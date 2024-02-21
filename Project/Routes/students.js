@@ -1,23 +1,6 @@
 const express = require("express");
-const Joi = require("joi");
 const router = express.Router();
-const mongoose = require("mongoose");
-
-const studentsSchema = new mongoose.Schema({
-  name: { type: String, required: true, minlength: 3, maxlength: 20},
-  isEnrolled:{
-    type:Boolean,
-    default:false,
-  },
-  phone:{
-    type:String,
-    require:true,
-    minlength:10,
-    maxlength:25
-  }
-});
-
-const Student = mongoose.model("Student", studentsSchema);
+const {Student, validate} = require('../Models/studentsModel')
 
 
 router.get("/", async (req, res) => {
@@ -26,7 +9,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { error } = validateData(req.body);
+  const { error } = validate(req.body);
   if (error) res.status(400).send(error.details[0].message);
 
   const student = new Student({
@@ -50,7 +33,7 @@ router.put("/:id", async (req, res) => {
       .status(404)
       .send("The student with the given Id was not present");
 
-  const { error } = validateData(req.body);
+  const { error } = validate(req.body);
   if (error) res.status(400).send(error.details[0].message);
 
   res.send(student);
@@ -76,13 +59,5 @@ router.get("/:id", async (req, res) => {
   res.send(student);
 });
 
-function validateData(student) {
-  const schema = Joi.object({
-    name: Joi.string().min(2).max(15).required(),
-    isEnrolled:Joi.boolean(),
-    phone:Joi.string().min(10).max(25).required(),
-  });
-  return schema.validate(student);
-}
 
 module.exports = router;
