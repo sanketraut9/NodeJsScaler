@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 
-const categorySchema = new mongoose.Schema({
+const categoriesSchema = new mongoose.Schema({
     name: { type: String, required: true, minlength: 3, maxlength: 20 },
   });
   
-  const Category = mongoose.model("Category", categorySchema);
+  const Category = mongoose.model("Category", categoriesSchema);
 
 
   function validateData(category) {
@@ -19,3 +19,4 @@ const categorySchema = new mongoose.Schema({
 
   exports.Category = Category
   exports.validate = validateData
+  exports.categoriesSchema = categoriesSchema
