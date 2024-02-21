@@ -5,7 +5,7 @@ const app = express();
 
 //moddleware export
 const middlewareFunc = require('./middlewares/middle')
-const middlewareFunc2 = require('./middle2')
+const middlewareFunc2 = require('./middlewares/middle2')
 
 //Environmet Port       || if not sesrver start on 3000 port
 const port = process.env.port || 3000;
@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(middlewareFunc)
 app.use(middlewareFunc2)
 
-app.use(morgan())
+app.use(morgan('tiny'))                    //tiny - for short msg
 //get, post, put, delete
 //get() take 2 object - '/' where will requesting to data 
 
