@@ -1,7 +1,8 @@
 const express = require('express')
-const categaries = require('./Routes/categaries')
 const mongoose = require('mongoose')
+const categaries = require('./Routes/categaries')
 const students = require('./Routes/students')
+const courses = require('./Routes/courses')
 const app = express()
 
 
@@ -14,6 +15,7 @@ mongoose.connect(mongoDBUrl)
     app.use(express.json())
     app.use('/api/categaries', categaries)
     app.use('/api/students', students)
+    app.use('/api/courses', courses)
     
     
 
