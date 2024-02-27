@@ -17,10 +17,12 @@ mongoose.connect('mongodb://127.0.0.1/myapp')
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.json())
+// app.use(express.json())
 
 // Routes
 app.use('/products', productRoutes);
+
+app.use('/categories', productRoutes);
 
 // Start the server
 app.listen(port, () => {
